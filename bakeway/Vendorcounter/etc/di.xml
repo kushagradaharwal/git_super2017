@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Bakeway
+ *
+ * @category  Bakeway
+ * @package   Bakeway_Vendorcounter
+ * @author    Bakeway
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <preference for="Bakeway\Vendorcounter\Api\Data\CounterStatusInterface" type="Bakeway\Vendorcounter\Model\CounterStatus" />
+    <preference for="Bakeway\Vendorcounter\Api\CounterRepositoryInterface" type="Bakeway\Vendorcounter\Model\Resource\CounterRepository" />
+</config>

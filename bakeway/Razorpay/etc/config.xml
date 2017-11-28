@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <razorpay>
+                <model>Bakeway\Razorpay\Model\PaymentMethod</model>
+                <title>Razorpay</title>
+                <merchant_name_override>Magento</merchant_name_override>
+                <active>0</active>
+                <order_status>pending</order_status>
+                <key_id>Key ID</key_id>
+                <key_secret>Key Secret</key_secret>
+                <is_gateway>0</is_gateway>
+                <can_use_checkout>1</can_use_checkout>
+                <can_authorize>0</can_authorize>
+                <can_capture>0</can_capture>
+            </razorpay>
+        </payment>
+    </default>
+</config>

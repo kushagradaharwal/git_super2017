@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Bakeway
+ *
+ * @category  Bakeway
+ * @package   Bakeway_CustomAttributes
+ * @author    Bakeway
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:DataObject/etc/fieldset.xsd">
+    <scope id="global">
+        <!--quote convert to order-->
+        <fieldset id="sales_convert_quote">
+            <field name="delivery_time">
+                <aspect name="to_order" />
+            </field>
+            <field name="delivery_type">
+                <aspect name="to_order" />
+            </field>
+        </fieldset>
+        <!--quote item convert to order item-->
+        <fieldset id="quote_convert_item">
+            <field name="custom_message">
+                <aspect name="to_order_item" />
+            </field>
+        </fieldset>
+    </scope>
+</config>

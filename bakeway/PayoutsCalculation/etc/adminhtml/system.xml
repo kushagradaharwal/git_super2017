@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Bakeway
+ * @package   Bakeway_PayoutsCalculation
+ * @author    Bakeway
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payouts_calculation" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <class>separator-top</class>
+            <label>Payouts And Tax</label>
+            <tab>bakewaysettings</tab>
+            <resource>Bakeway_VendorNotification::config</resource>
+            <group id="calculations_tax_percent" translate="label" type="text" sortOrder="500" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Tax Percentages</label>
+                <field id="tcs_percentage" translate="label comment" type="text" sortOrder="2" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>TCS Percentage</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="order_payment_gateway_percentage" translate="label comment" type="text" sortOrder="2" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Payment Gateway Percentage For Order</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="delivery_fee_tax_percentage" translate="label comment" type="text" sortOrder="2" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Delivery Fee Tax Percentage</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="cgst_percentage" translate="label comment" type="text" sortOrder="2" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>CGST Percentage</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="sgst_percentage" translate="label comment" type="text" sortOrder="2" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>SGST Percentage</label>
+                </field>
+                <field id="igst_percentage" translate="label comment" type="text" sortOrder="2" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>IGST Percentage</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+            </group>
+            <group id="bakeway_account_details" translate="label" type="text" sortOrder="500" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Bakeway Account Details</label>
+                <field id="nodal_account_number" translate="label comment" type="text" sortOrder="2" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Nodal Account Number</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="nodal_account_ifsc" translate="label comment" type="text" sortOrder="2" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Nodal Account IFSC Code</label>
+                    <validate>validate-alphanum</validate>
+                </field>
+                <field id="nodal_account_name" translate="label comment" type="text" sortOrder="2" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Nodal Account Name</label>
+                    <validate>validate-alphanum-with-spaces</validate>
+                </field>
+                <field id="credit_account_number" translate="label comment" type="text" sortOrder="2" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Credit Account Number</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="credit_account_ifsc" translate="label comment" type="text" sortOrder="2" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Credit Account IFSC</label>
+                    <validate>validate-alphanum</validate>
+                </field>
+                <field id="credit_account_name" translate="label comment" type="text" sortOrder="2" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Credit Account Name</label>
+                    <validate>validate-alphanum-with-spaces</validate>
+                </field>
+                <field id="credit_account_email" translate="label comment" type="text" sortOrder="2" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Account Email</label>
+                    <validate>validate-email</validate>
+                </field>
+                <field id="credit_account_mobile" translate="label comment" type="text" sortOrder="2" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Account Mobile</label>
+                </field>
+                <field id="bakeway_pan" translate="label comment" type="text" sortOrder="2" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Bakeway PAN</label>
+                </field>
+                <field id="bakeway_gstin" translate="label comment" type="text" sortOrder="2" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Bakeway GSTIN</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

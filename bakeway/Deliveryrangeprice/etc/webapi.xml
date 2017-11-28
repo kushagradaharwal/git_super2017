@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/vendors/me/delivery" method="POST">
+        <service class="Bakeway\Deliveryrangeprice\Api\VendorDeliveryRepositoryInterface" method="updateDelivery"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="vendorId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/vendors/me/delivery" method="GET">
+        <service class="Bakeway\Deliveryrangeprice\Api\VendorDeliveryRepositoryInterface" method="getDeliverystatus"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="vendorId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+</routes>

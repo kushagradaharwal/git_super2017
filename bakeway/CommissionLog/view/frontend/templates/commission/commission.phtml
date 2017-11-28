@@ -1,0 +1,43 @@
+<?php
+if (sizeof($block->getCommissionList()) > 0):
+    ?>
+
+    <div class="table-wrapper reviews">
+        <table class="data table table-reviews" id="my-reviews-table">
+            <caption class="table-caption"><?php /* @escapeNotVerified */
+                echo __('Commission') ?></caption>
+            <thead>
+            <tr>
+                <th scope="col" class="col date"><?php /* @escapeNotVerified */
+                    echo __('Sr. no') ?></th>
+                <th scope="col" class="col item"><?php /* @escapeNotVerified */
+                    echo __('Commission Rate') ?></th>
+                <th scope="col" class="col item"><?php /* @escapeNotVerified */
+                    echo __('Updated Date') ?></th>
+                <th scope="col" class="col item"><?php /* @escapeNotVerified */
+                    echo __('Updated By') ?></th>
+            </tr>
+
+            </thead>
+            <tbody>
+            <?php
+            $i = 1;
+            foreach ($block->getCommissionList() as $Sellerdata) { ?>
+                <tr>
+                    <th style="font-weight:normal"><?php echo $i; ?></th>
+                    <th style="font-weight:normal"><?php echo $Sellerdata['commission_rate']; ?></th>
+                    <th style="font-weight:normal"><?php echo $Sellerdata['created_at']; ?></th>
+                    <th style="font-weight:normal"><?php echo $Sellerdata['created_by']; ?></th>
+                </tr>
+                <?php $i++;
+            } ?>
+            </tbody>
+        </table>
+    </div>
+    <?php
+else: ?>
+    <div class="message info empty"><span><?php /* @escapeNotVerified */
+            echo __('No Records Found.') ?></span></div>
+
+<?php endif;
+?>

@@ -1,0 +1,129 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Bakeway
+ *
+ * @category  Bakeway
+ * @package   Bakeway_Vendorapi
+ * @author    Bakeway
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/partners/:vendorId/products" method="GET">
+        <service class="Bakeway\Vendorapi\Api\VendorProductRepositoryInterface" method="getProducts"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/vendors/me/products" method="GET">
+        <service class="Bakeway\Vendorapi\Api\VendorProductRepositoryInterface" method="getProducts"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="vendorId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/user/authenticate" method="POST">
+        <service class="Magento\Customer\Api\AccountManagementInterface" method="authenticate"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/vendor/orders/:orderId" method="GET">
+        <service class="Bakeway\Vendorapi\Api\VendorOrderRepositoryInterface" method="getOrder"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="vendorId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/vendor/orders/:orderId/accept" method="POST">
+        <service class="Bakeway\Vendorapi\Api\VendorOrderRepositoryInterface" method="acceptOrder"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="vendorId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/vendor/orders/:orderId/reject" method="POST">
+        <service class="Bakeway\Vendorapi\Api\VendorOrderRepositoryInterface" method="rejectOrder"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="vendorId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/vendor/orders/statuses" method="GET">
+        <service class="Bakeway\Vendorapi\Api\VendorOrderRepositoryInterface" method="getStatusList"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="vendorId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/customers/order/statuses" method="GET">
+        <service class="Bakeway\Vendorapi\Api\VendorOrderRepositoryInterface" method="getStatusList"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/vendor/orders/:orderId/status" method="PUT">
+        <service class="Bakeway\Vendorapi\Api\VendorOrderRepositoryInterface" method="setOrderStatus"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="vendorId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/vendor/orders" method="GET">
+        <service class="Bakeway\Vendorapi\Api\VendorOrderRepositoryInterface" method="getVendorOrderList"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="vendorId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/vendor/orders/unpaid" method="GET">
+        <service class="Bakeway\Vendorapi\Api\VendorOrderRepositoryInterface" method="getVendorUnpaidOrderList"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="vendorId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/customers/logout/me" method="POST">
+        <service class="Magento\Integration\Api\CustomerTokenServiceInterface" method="revokeCustomerAccessToken"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/vendors/info/me" method="GET">
+        <service class="Bakeway\Vendorapi\Api\VendorInformationRepositoryInterface" method="getDetails"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="vendorId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/vendor/orders/rejectionreasons" method="GET">
+        <service class="Bakeway\Vendorapi\Api\VendorOrderRepositoryInterface" method="getRejectedReasonsList"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="vendorId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+</routes>

@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/partners/:id/products/:sku" method="GET">
+        <service class="Bakeway\ProductApi\Api\VendorProductRepositoryInterface" method="getProductsdetails"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/url/info/:url" method="GET">
+        <service class="Bakeway\ProductApi\Api\CatalogSeoRepositoryInterface" method="getUrlDetails"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/vendors/:vendorId/deliverycharges" method="GET">
+        <service class="Bakeway\ProductApi\Api\VendorDeliveryChragesRepositoryInterface" method="getDeliverycharges" />
+            <resources>
+                <resources ref="anonymous"/>
+            </resources>       
+    </route>
+</routes>

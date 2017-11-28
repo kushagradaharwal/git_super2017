@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Bakeway
+ * @package   Bakeway_CustomerWebapi
+ * @author    Bakeway
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <preference for="Bakeway\CustomerWebapi\Api\CustomerAccountRepositoryInterface" type="Bakeway\CustomerWebapi\Model\CustomerAccountRepository" />
+    <preference for="Bakeway\CustomerWebapi\Api\CustomerOrderRepositoryInterface" type="Bakeway\CustomerWebapi\Model\CustomerOrderRepository" />
+
+    <type name="Magento\Config\Model\Config\Export\ExcludeList">
+        <arguments>
+            <argument name="configs" xsi:type="array">
+                <item name="react_site_settings/react_settings_general/react_url" xsi:type="string">1</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Email\Model\Source\Variables">
+        <plugin name="custom_plugin" type="Bakeway\CustomerWebapi\Plugin\Magento\Email\Model\Source\Variables"/>
+    </type>
+</config>

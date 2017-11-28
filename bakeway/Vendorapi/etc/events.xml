@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Bakeway
+ *
+ * @category  Bakeway
+ * @package   Bakeway_Vendorapi
+ * @author    Bakeway
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_order_item_collection_load_after">
+        <observer name="bakeway_sales_order_item_collection_load_after" instance="Bakeway\Vendorapi\Observer\SalesOrderItemCollectionAfter" />
+    </event>
+    <event name="email_invoice_set_template_vars_before">
+        <observer name="custom_invoice_email_variable" instance="Bakeway\Vendorapi\Observer\SalesInvoiceTemplateVarsBefore" />
+    </event>
+</config>

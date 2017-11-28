@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Bakeway
+ *
+ * @category  Bakeway
+ * @package   Bakeway_Vendorapi
+ * @author    Bakeway
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+  <preference for="Magento\Framework\Webapi\ServiceOutputProcessor" type="Bakeway\Vendorapi\Model\ServiceOutputProcessor" />
+  
+  <preference for="Bakeway\Vendorapi\Api\VendorProductRepositoryInterface" type="Bakeway\Vendorapi\Model\Resource\VendorProductRepository" />
+
+  <preference for="Bakeway\Vendorapi\Api\VendorOrderRepositoryInterface" type="Bakeway\Vendorapi\Model\Resource\VendorOrderRepository" />
+
+  <preference for="Bakeway\Vendorapi\Api\VendorInformationRepositoryInterface" type="Bakeway\Vendorapi\Model\Resource\VendorInformationRepository" />
+ <!--  <preference for="Magento\Framework\DB\LoggerInterface" type="Magento\Framework\DB\Logger\File"/>
+	<type name="Magento\Framework\DB\Logger\File">
+		<arguments>
+			<argument name="logAllQueries" xsi:type="boolean">true</argument>
+			<argument name="debugFile" xsi:type="string">sql23.log</argument>
+		</arguments>
+	</type> -->
+	<type name="Magento\Webapi\Controller\Rest">
+        <plugin name="VendorapiPlugin" type="Bakeway\Vendorapi\Plugin\Rest" sortOrder="1" />
+    </type>
+    <type name="Magento\Sales\Model\ResourceModel\Order">
+        <plugin name="vendorauthorization" type="Bakeway\Vendorapi\Model\ResourceModel\Order\Plugin\Authorization" />
+    </type>
+    <type name="Magento\Integration\Model\CustomerTokenService">
+        <plugin name="vendor_token_create_before_plugin" type="Bakeway\Vendorapi\Plugin\VendorTokenCreateBeforePlugin" />
+    </type>
+    <preference for="Magento\Sales\Model\Order\Pdf\Invoice" type="Bakeway\Vendorapi\Model\Rewrite\Order\Pdf\Invoice" />
+</config>

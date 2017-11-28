@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Bakeway
+ * @package   Bakeway_GuestOrder
+ * @author    Bakeway
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <preference for="Bakeway\GuestOrder\Api\GuestOrderTrackRepositoryInterface" type="Bakeway\GuestOrder\Model\GuestOrderTrackRepository" />
+    <preference for="Bakeway\GuestOrder\Api\GuestCartsEditRepositoryInterface" type="Bakeway\GuestOrder\Model\GuestCartsEditRepository" />
+    <preference for="Magento\Sales\Model\Order" type="Bakeway\GuestOrder\Model\Rewrite\Order" />
+</config>

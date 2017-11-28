@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Bakeway
+*
+* @category  Bakeway
+* @package   Bakeway_CustomerWebapi
+* @author    Bakeway
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="bakewaysettings" translate="label" sortOrder="20">
+            <label>Bakeway</label>
+        </tab>
+        <section id="react_site_settings" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>React Settings</label>
+            <tab>bakewaysettings</tab>
+            <resource>Bakeway_CustomerWebapi::config</resource>
+            <group id="react_settings_general" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="react_url" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>React Website Url</label>
+                    <comment>Enter React Website Url</comment>
+                </field>
+                
+                <field id="guest_track_url" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Guest Order Track Url</label>
+                    <comment>Enter Guest Order Track Url</comment>
+                </field>
+                
+            </group>
+        </section>
+    </system>
+</config>

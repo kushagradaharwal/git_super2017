@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Bakeway
+ *
+ * @category  Bakeway
+ * @package   Bakeway_CustomAttributes
+ * @author    Bakeway
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Magento\Quote\Model\QuoteRepository">
+        <plugin name="CustomAttributePlugin" type="Bakeway\CustomAttributes\Plugin\QuoteRepository" sortOrder="1" />
+    </type>
+</config>

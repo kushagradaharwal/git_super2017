@@ -1,0 +1,69 @@
+<?php
+/**
+ * {{controller}} {{action}} template
+ *
+ * @var $block \Bakeway\Deliveryrangeprice\Block\Delivery\Rangeprice
+ */
+//echo $block->hello;
+$_data = $block->getSellerInformation();
+
+
+?>
+<form class="form setdelivery"
+      action="<?php /* @escapeNotVerified */
+      echo $this->getUrl('deliveryrangeprice/delivery/editsave', ['_secure' => true]); ?>"
+      id="setdelievry-form"
+      method="post"
+      data-hasrequired="<?php /* @escapeNotVerified */
+      echo __('* Required Fields') ?>"
+      data-mage-init='{"validation":{}}'>
+    <?php //for($i=1;$i<=8;$i++) { ?>
+    <table cellspacing="0" class="border wk-mp-list-table">
+        <!--  <thead>
+              <tr id="wk-mp-tr-heading">
+                  <th><span>From kms</span></th>
+                  <th><span>To kms</span></th>
+                  <th><span>Delivery Price</span></th>
+                  <th><span>&nbsp;</span></th>
+              </tr>
+          </thead>-->
+        <tbody id="colender-check" class="wk-mp-body">
+
+        <input type="hidden" name="seller_id" value="<?php echo $block->getCustomerId(); ?>"/>
+        <input type="hidden" name="delivery_id" value="<?php echo $_data['id'] ?>"/>
+        <tr>
+
+            <td>
+	    			<span class="wk-mp-td-span">
+	    				From kms:   <input type="number" class="input-text" title="from_kms" id="from_kms" name="from_kms"
+                                           aria-required="true" value="<?php echo $_data['from_kms']; ?>">
+	    			</span>
+                <span class="wk-mp-td-span">
+	    				To Kms:  <input type="number" class="input-text" title="To kms" id="to_kms" name="to_kms"
+                                        aria-required="true" value="<?php echo $_data['to_kms']; ?>">
+	    			</span>
+            </td>
+            <td>
+	    			  <span class="wk-mp-td-span"> Price: <input type="number" class="input-text" title="Delivery Price"
+                                                                 id="delivery_price" name="delivery_price"
+                                                                 value="<?php echo $_data['delivery_price']; ?>">
+	    			  </span>
+            </td>
+            <td>
+                <select class="input-text" name="is_active" aria-required="true">
+                    <option value="1" <?php if ($_data['is_active'] == 1): ?>selected=required<?php endif; ?> >Enable
+                    </option>
+                    <option value="0" <?php if ($_data['is_active'] == 0): ?>required=required<?php endif; ?>>Disable
+                    </option>
+                </select>
+            </td>
+            <input type="hidden" name="updated_time" value="<?php echo date("Y-m-d  h:i:s"); ?>"/>
+            <td>
+                <button type="submit" title="Save" class="button">
+                    <span><span><span>EDIT</span></span></span>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>

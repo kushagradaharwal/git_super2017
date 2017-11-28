@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Bakeway
+ * @package   Bakeway_CustomerWebapi
+ * @author    Bakeway
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Bakeway_CustomerWebapi" setup_version="1.0.3" />
+</config>

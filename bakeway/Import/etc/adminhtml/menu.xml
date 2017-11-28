@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Bakeway. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Backend/etc/menu.xsd">
+    <menu>
+        <add id="Magento_User::system_sellerimport" title="Bakeway Import" translate="title" module="Magento_User" sortOrder="80" parent="Magento_Backend::system" resource="Magento_User::acl"/>
+        <add id="Bakeway_Import::bakeway_importindex" title="import seller" module="Bakeway_Import"  sortOrder="20" dependsOnModule="Bakeway_Import"  parent="Magento_User::system_sellerimport" action="import/import/index" resource="Bakeway_Import::bakeway_importindex"/>
+<!--AddMenu-->
+    </menu>
+</config>
+

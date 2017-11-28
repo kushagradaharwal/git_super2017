@@ -1,0 +1,57 @@
+<?php
+/**
+ * Bakeway
+ *
+ * @category  Bakeway
+ * @package   Bakeway_Storeclone
+ * @author    Bakeway
+ */
+
+/** @var \Bakeway\Storeclone\Block\Adminhtml\StoreSearchResult $block */
+
+/** @var \Bakeway\Storeclone\Block\Adminhtml\Customer\Edit\Tab\Grid\Sellers $blockGrid */
+$blockGrid = $block->getBlockGrid();
+//$gridJsObjectName = $blockGrid->getJsObjectName();
+?>
+<?php  echo $block->getGridHtml(); ?>
+<script>
+    require([
+        "jquery",
+        'Magento_Ui/js/modal/confirm'
+
+    ], function($, confirmation){
+        $(".storerow").on('click',function(event){
+            var sellerId = $(this).data("param");
+            confirmation({
+                title: 'Confirmation Alert',
+                content: 'Are you sure you want to clone products from this store?',
+                actions: {
+                    confirm: function(){
+                        new Ajax.Request('<?php echo $block->getAjaxUrlStoreProducts() ?>', {
+                            method: 'post',
+                            dataType: "html",
+                            parameters:{sellerId:sellerId},
+                            onSuccess: function(transport){
+                                $('#storeresult').html('');
+                                var htmlstr = '';
+                                htmlstr += '<div>'
+                                    +'<h1>'
+                                    +'Review the products to be get cloned'
+                                    +'</h1>'
+                                    +'</div>';
+                                htmlstr += transport.responseText
+                                htmlstr += '<div>'
+                                    +'<button data-param="'+sellerId+'" id="clonestart" class="action-default scalable action-secondary" type="button" title="Start Clone">'
+                                    +'<span>Start Clone</span>'
+                                    +'</button>'
+                                    +'</div>';
+                                $('#storeclone_base_fieldset').after($('#storeresult').html(htmlstr).show());
+                            }
+                        });
+                    },
+                    cancel: function(){}
+                }
+            });
+        });
+    });
+</script>

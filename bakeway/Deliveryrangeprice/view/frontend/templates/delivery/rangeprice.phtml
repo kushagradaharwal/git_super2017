@@ -1,0 +1,693 @@
+<?php
+/**
+ * {{controller}} {{action}} template
+ *
+ * @var $block \Bakeway\Deliveryrangeprice\Block\Delivery\Rangeprice
+ */
+//echo $block->hello;
+?>
+<style>
+    #wrapper #data_table tr {
+        border-bottom: 1px solid #ccc;
+    }
+
+    .button.delete {
+        float: left;
+        margin-left: 8px;
+    }
+
+    .button.edit, .button.editsave {
+        float: left;
+        margin-right: 5%;
+    }
+
+    #data_table tr td {
+        width: 14%;
+    }
+
+    #data_table .save {
+        margin-right: 3%;
+    }
+
+    #data_table_default .delivery {
+        margin-left: 45px;
+    }
+
+    #data_table_default select {
+        width: 15%;
+        margin-left: 7px;
+    }
+
+    #delivery-range-main-div-second {
+        margin-top: 9px;
+    }
+
+    #delivery-range-main-div ul li {
+        list-style-type: circle;
+    }
+
+    #wrapper {
+        margin-top: 16px;
+    }
+
+    .deliveryoption {
+        padding-left: 22px
+    }
+</style>
+
+<?php
+$helper = $this->helper('Bakeway\Deliveryrangeprice\Helper\Data');
+
+if (empty($helper->autoDeliveryChage($block->getCustomerId()))) {
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $objectManager->create('Bakeway\Deliveryrangeprice\Model\VendorDeliveryRepository')->updateDelivery($block->getCustomerId(), false);
+}
+?>
+<?php $_DeliveryValue = $block->getDeliveryvalue($block->getCustomerId()); ?>
+<div id="delivery-loader" style="display: none;"><img
+        src="<?php echo $block->getViewFileUrl('Bakeway_Deliveryrangeprice::images/ajaxloder.gif'); ?>"></div>
+<input type="hidden" name="seller_id" id="seller_id" value="<?php echo $block->getCustomerId(); ?>"/>
+<input type="hidden" name="seller_email" id="seller_email"
+       value="<?php echo $block->getSellerEmail($block->getCustomerId()); ?>"/>
+<input type="hidden" name="updated_time" id="updated_time" value="<?php echo date("Y-m-d  h:i:s"); ?>"/>
+<input type="hidden" name="countcc" id="countcc" value=""/>
+<div id="delivery-range-main-div">
+    <h4>Set distance in Kms for providing delivery service to your Customer ordering from Bakeway.</h4>
+    <ul>
+        <li> System will not take orders for you if destination address is outside the range specified below.</li>
+        <li> Shortest distance is measured between your shop address & customer destination address</li>
+        <li> Delivery Fee to be selected as per delivery range & will be taxable to the customer</li>
+    </ul>
+    <span class="delivery"> <h4>Turn On Delivery Service</h4></span>
+    <div class="deliveryoption"><input id="delivery-yes" type="radio" name="is_delivery"
+                                       value="1" <?php if ($_DeliveryValue == 1): ?> checked=checked <?php endif; ?>>&nbsp;Yes
+        <span style="padding-right: 10px;">&nbsp;</span>
+        <input id="delivery-no" type="radio" name="is_delivery"
+               value="0" <?php if ($_DeliveryValue == 0): ?> checked=checked <?php endif; ?>>&nbsp;No
+        <span style="padding-right: 10px;">&nbsp;</span>
+        <button type="submit" title="Save" id="add-delivery" class="button add delivery" value="Add Row">
+            <span><span><span>SAVE</span></span></span>
+        </button>
+    </div>
+    <!--<select name="is_delivery" id="is_delivery">
+    <option value="1" <?php if ($_DeliveryValue == 1): ?> selected=selected <?php endif; ?>>Pickup & delivery</option>
+    <option value="0"  <?php if ($_DeliveryValue == 0): ?> selected=selected <?php endif; ?>>Pickup</option>
+</select>-->
+</div>
+
+<div id="delivery-range-main-div-second">
+    <strong>Note: </strong>Delivery fee mentioned below should be inclusive of GST i.e CGST (9%) and SGST (9%) for services within state. Bakeway will calculate TCS by considering 18% less of delivery fee mentioned.
+</div>
+<div id="wrapper">
+    <table class="border wk-mp-list-table" cellspacing=0 id="data_table_default">
+        <tr>
+            <td colspan=5>
+                <button type="submit" title="Save" id="add" class="button add" onclick="add_row();" value="Add Row">
+                    <span><span><span>Add New Record</span></span></span>
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <th style="width: 20%;">From kms</th>
+            <th style="width: 20%;"> To Kms</th>
+            <th>Price including Tax</th>
+            <th style="width: 31%;">Status</th>
+            <th>&nbsp;</th>
+        </tr>
+    </table>
+    <table class="border wk-mp-list-table" cellspacing=0 id="data_table">
+<?php
+$i = 0;
+if ($block->getSellerData()):
+    ?>
+            <?php foreach ($block->getSellerData() as $_sellerdata): ?>
+                <input type="hidden" name="row_id<?php echo $i; ?>" id="row_id<?php echo $i; ?>"
+                       value="<?php
+        /* @escapeNotVerified */
+        echo $_sellerdata['id']
+                ?>">
+                <tr id="row<?php echo $i; ?>">
+                    <td id="name_row<?php echo $i; ?>"><?php
+               /* @escapeNotVerified */
+               echo $_sellerdata['from_kms']
+                ?></td>
+                    <td id="country_row<?php echo $i; ?>"><?php
+                        /* @escapeNotVerified */
+                        echo $_sellerdata['to_kms']
+                        ?></td>
+                    <td id="age_row<?php echo $i; ?>"><?php
+                        /* @escapeNotVerified */
+                        echo $_sellerdata['delivery_price']
+                        ?></td>
+                    <td>
+                        <select id="status_row<?php echo $i; ?>" disabled=true>
+        <?php
+        $_selectalued = $_selectalue = "";
+        if ($_sellerdata['is_active'] == 1):
+            $_selectalue = "selected";
+        else:
+            $_selectalued = "selected";
+        endif;
+        ?>
+                            <option val="0" <?php echo $_selectalued; ?> >Disable</option>
+                            <option val="1" <?php echo $_selectalue; ?> >Enable</option>
+                        </select>
+                    </td>
+                    <td>
+
+
+                        <button type="submit" id="edit_button<?php echo $i; ?>" title="Edit" class="button edit"
+                                onclick="edit_row(<?php echo $i; ?>);">
+                            <span><span><span>Edit</span></span></span>
+                        </button>
+
+
+                                                                <!--<button type="submit"  id="save_button<?php echo $i; ?>" title="Save" class="button save" onclick="save_row(<?php echo $i; ?>);">
+                                                    <span><span><span>Save</span></span></span>
+                                        </button>-->
+
+
+                        <button type="submit" style="display:none" title="Update" class="button editsave"
+                                id="editsave<?php echo $i; ?>"
+                                onclick="editsave_row(<?php echo $i; ?>,<?php echo $_sellerdata['id'] ?>);">
+                            <span><span><span>Update</span></span></span>
+                        </button>
+
+                        <button type="submit" title="Save" class="button delete" id="delete_button<?php echo $i; ?>"
+                                onclick="delete_row(<?php echo $i; ?>,<?php
+                    /* @escapeNotVerified */
+                    echo $_sellerdata['id']
+        ?>);">
+                            <span><span><span>Delete</span></span></span>
+                        </button>
+
+                        <button type="submit" style="display:none" title="Cancel" class="button cancel"
+                                id="cancelrow<?php echo $i; ?>" onclick="cancelrow_without_edit(<?php echo $i; ?>);">
+                            <span><span><span>Cancel</span></span></span>
+                        </button>
+
+
+                    </td>
+                </tr>
+        <?php
+        $i++;
+    endforeach;
+endif;
+?>
+
+
+    </table>
+</div>
+
+<script>
+
+
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/confirm'
+    ],
+            function ($, confirmationdelivery) {
+                $('#add-delivery').click(function (event) {
+                    event.preventDefault();
+                    if (document.getElementById('delivery-yes').checked) {
+                        var status = document.getElementById('delivery-yes').value;
+                    } else if (document.getElementById('delivery-no').checked) {
+                        var status = document.getElementById('delivery-no').value;
+                    }
+
+                    /*prototype script to check when do delivery off*/
+                    var cc_count = "";
+<?php if (!empty($block->getSellerData())) { ?>
+                        var cc_count = '<?php echo count($block->getSellerData()); ?>';
+<?php } ?>
+                    if (status == 1) {
+                        var cccountval = document.getElementById("countcc").value;
+                        if (cc_count == "" && cccountval == "")
+                        {
+                            confirmationdelivery({
+                                content: 'Please Mention delivery fee.',
+                                actions: {
+                                    confirm: function () {
+                                        document.getElementById("delivery-no").checked = true;
+                                    },
+                                    cancel: function () {
+                                    },
+                                    always: function () {
+
+                                    }
+                                }
+                            });
+                            return false;
+                        }
+                    }
+
+                    /* end prototyp code */
+                    var seller_id = document.getElementById('seller_id').value;
+                    var url = event.currentTarget.href;
+                    if (status == 0)
+                        var sta = 'disable';
+                    else {
+                        var sta = 'enable';
+                    }
+
+                    confirmationdelivery({
+                        content: 'Are you sure you want to ' + sta + ' delivery service ?',
+                        actions: {
+                            confirm: function () {
+                                document.getElementById('delivery-loader').style.display = "block";
+                                $.ajax({
+                                    type: "POST",
+                                    dataType: "json",
+                                    url: "<?php echo $this->getUrl('deliveryrangeprice/delivery/deliveryapi', ['_secure' => true]); ?>", //Relative or absolute path to response.php file
+                                    data: {
+                                        "seller_id": seller_id,
+                                        "status": status,
+                                    },
+                                    success: function (data) {
+                                        document.getElementById('delivery-loader').style.display = "none";
+                                    }
+                                });
+                            },
+                            cancel: function () {
+                                document.getElementById('delivery-loader').style.display = "none";
+                            },
+                            always: function () {
+
+                            }
+                        }
+                    });
+                    return false;
+                });
+            });
+<?php if ($block->getSellerData() == 0): ?>
+        for (var j = 0; j <= 4; j++) {
+            document.getElementById("add").onclick();
+            document.getElementById("name_row" + j).placeholder = 3 * j;
+            document.getElementById("country_row" + j).placeholder = 3 * (j + 1);
+            document.getElementById("age_row" + j).placeholder = 0;
+        }
+<?php endif; ?>
+    function cancelrow_without_edit(no) {
+
+        var name = document.getElementById("name_row" + no);
+        var country = document.getElementById("country_row" + no);
+        var age = document.getElementById("age_row" + no);
+        var status = document.getElementById("status_row" + no);
+        status.disabled = true;
+        var update_fkms_val_e = document.getElementById("name_text" + no).value;
+        var update_tkms_val_e = document.getElementById("country_text" + no).value;
+        var update_price_val_e = document.getElementById("age_text" + no).value;
+        var update_status_val_e = document.getElementById("status_row" + no).value;
+        var checkedit_status = checkedit_stats_disable = "";
+        if (update_status_val_e == 'Enable') {
+            var checkedit_status = "selected = selected";
+        } else {
+            var checkedit_stats_disable = "selected = selected";
+        }
+
+        name.innerHTML = "<td id='name_row" + no + "'>" + update_fkms_val_e + "</td>";
+        country.innerHTML = "<td type='text' id='country_row" + no + "'>" + update_tkms_val_e + "</td>";
+        age.innerHTML = "<td type='text' id='age_row" + no + "'>" + update_price_val_e + "</td>";
+        status.innerHTML = "<select name='is_active' id='status_row" + no + "'><option val='0' " + checkedit_stats_disable + ">disable</option><option val='1' " + checkedit_status + ">Enable</option></select>";
+        document.getElementById("edit_button" + no).style.display = "block";
+        document.getElementById("editsave" + no).style.display = "none";
+        document.getElementById("delete_button" + no).style.display = "block";
+        document.getElementById("cancelrow" + no).style.display = "none";
+
+
+    }
+
+    function cancel_row(no) {
+//document.getElementById("edit_button"+no).style.display="none";
+        document.getElementById("row" + no + "").outerHTML = "";
+    }
+
+    function editsave_row(no, rowid) {
+
+
+        document.getElementById("edit_button" + no).style.display = "none";
+        //var row_id = document.getElementById("row_id"+no).value;
+        var row_id = rowid;
+
+        var seller_id = document.getElementById("seller_id").value;
+        var updated_time = document.getElementById("updated_time").value;
+
+        var update_fkms_val_s = document.getElementById("name_text" + no).value;
+        var update_tkms_val_s = document.getElementById("country_text" + no).value;
+        var update_price_val_s = document.getElementById("age_text" + no).value;
+        var update_status_val_s = document.getElementById("status_row" + no).value;
+        /*validation*/
+        var fkmsf = document.getElementById("name_text" + no);
+        var tkmsf = document.getElementById("country_text" + no);
+        var pricef = document.getElementById("age_text" + no);
+        var fkms_val_s = document.getElementById("name_text" + no).value;
+        var tkms_val_S = document.getElementById("country_text" + no).value;
+        var price_val_S = document.getElementById("age_text" + no).value;
+        if (fkms_val_s == "" && tkms_val_S == "" && price_val_S == "") {
+            fkmsf.style.border = "1px solid red";
+            tkmsf.style.border = "1px solid red";
+            pricef.style.border = "1px solid red";
+            return false;
+        } else if (fkms_val_s != "" && tkms_val_S == "" && price_val_S == "") {
+            tkmsf.style.border = "1px solid red";
+            pricef.style.border = "1px solid red";
+            fkmsf.removeAttribute("style");
+            return false;
+        } else if (fkms_val_s == "" && tkms_val_S != "" && price_val_S == "") {
+            fkmsf.style.border = "1px solid red";
+            pricef.style.border = "1px solid red";
+            tkmsf.removeAttribute("style");
+            return false;
+        } else if (fkms_val_s == "" && tkms_val_S == "" && price_val_S != "") {
+            fkmsf.style.border = "1px solid red";
+            tkmsf.style.border = "1px solid red";
+            pricef.removeAttribute("style");
+            return false;
+        } else if (fkms_val_s != "" && tkms_val_S != "" && price_val_S == "") {
+            fkmsf.removeAttribute("style");
+            tkmsf.removeAttribute("style");
+            pricef.style.border = "1px solid red";
+            return false;
+        } else if (fkms_val_s != "" && tkms_val_S == "" && price_val_S != "") {
+            fkmsf.removeAttribute("style");
+            tkmsf.style.border = "1px solid red";
+            pricef.removeAttribute("style");
+            return false;
+        } else if (fkms_val_s == "" && tkms_val_S != "" && price_val_S != "") {
+            fkmsf.style.border = "1px solid red";
+            tkmsf.removeAttribute("style");
+            pricef.removeAttribute("style");
+            return false;
+        } else if (fkms_val_s != "" && tkms_val_S != "" && price_val_S != "") {
+            document.getElementById("delivery-loader").style.display = "block";
+            /*ajax*/
+            require(['jquery', 'jquery/ui'], function ($) {
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "<?php echo $this->getUrl('deliveryrangeprice/delivery/editsave', ['_secure' => true]); ?>", //Relative or absolute path to response.php file
+                    data: {
+                        "delivery_id": row_id,
+                        "from_kms": update_fkms_val_s,
+                        "to_kms": update_tkms_val_s,
+                        "delivery_price": update_price_val_s,
+                        "is_active": update_status_val_s,
+                        "updated_time": updated_time
+                    },
+                    success: function (data) {
+                        /*
+                         var resmsg = data.savedsuccess;
+                         $(".opmsgdisplay_delivery").append("<div >"+resmsg+"</div>");
+                         */
+                        var checkedit_status = checkedit_stats_disable = "";
+                        if (update_status_val_s == 'Enable') {
+                            var checkedit_status = "selected = selected";
+                        } else {
+                            var checkedit_stats_disable = "selected = selected";
+                        }
+                        document.getElementById("status_row" + no).disabled = true;
+                        document.getElementById("name_row" + no).innerHTML = update_fkms_val_s;
+                        document.getElementById("country_row" + no).innerHTML = update_tkms_val_s;
+                        document.getElementById("age_row" + no).innerHTML = update_price_val_s;
+                        document.getElementById("status_row" + no).innerHTML = "<select name='is_active' id='status_row" + no + "'><option val='0' " + checkedit_stats_disable + ">disable</option><option val='1' " + checkedit_status + " >Enable</option></select>";
+                        document.getElementById("delivery-loader").style.display = "none";
+                        document.getElementById("edit_button" + no).style.display = "block";
+                        document.getElementById("editsave" + no).style.display = "none";
+                        document.getElementById("delete_button" + no).style.display = "block";
+                        document.getElementById("cancelrow" + no).style.display = "none";
+
+                    }
+                });
+            });
+            /*ajax*/
+        }
+
+
+    }
+
+    function edit_row(no) {
+
+        document.getElementById("edit_button" + no).style.display = "none";
+        document.getElementById("editsave" + no).style.display = "block";
+        document.getElementById("delete_button" + no).style.display = "none";
+        document.getElementById("cancelrow" + no).style.display = "block";
+        /*
+         document.getElementById("cancelrow"+no).style.display="block";
+         document.getElementById("delete_button"+no).style.display="none";
+         */
+
+
+        /* var table=document.getElementById("data_table");
+         var table_len=(table.rows.length);
+         for (i = 1; i < table_len; i++) {
+         
+         if(i == no)
+         {
+         
+         }else{
+         document.getElementById("cancelrow"+i).click();
+         }
+         
+         }*/
+
+        var name = document.getElementById("name_row" + no);
+        var country = document.getElementById("country_row" + no);
+        var age = document.getElementById("age_row" + no);
+        var status = document.getElementById("status_row" + no);
+        var row_id = document.getElementById("row_id" + no);
+        var seller_id = document.getElementById("seller_id").value;
+        status.disabled = true;
+
+        var update_status_val_s_edit = document.getElementById("status_row" + no).value;
+        var checkedit_status = checkedit_stats_disable = "";
+        if (update_status_val_s_edit == 'Enable') {
+            var checkedit_status = "selected = selected";
+        } else {
+            var checkedit_stats_disable = "selected = selected";
+        }
+        var name_data = name.innerHTML;
+        var country_data = country.innerHTML;
+        var age_data = age.innerHTML;
+        var status_data = status.innerHTML;
+
+        name.innerHTML = "<input type='number'  id='name_text" + no + "' value='" + name_data + "'>";
+        country.innerHTML = "<input type='number' id='country_text" + no + "' value='" + country_data + "'>";
+        age.innerHTML = "<input type='number' id='age_text" + no + "' value='" + age_data + "'>";
+        status.innerHTML = "<select name='is_active' id='status_row" + no + "'><option val='0' " + checkedit_stats_disable + ">disable</option><option val='1' " + checkedit_status + ">Enable</option></select>";
+
+        /*var table=document.getElementById("data_table");
+         var table_len=(table.rows.length);
+         for (i = 1; i < table_len; i++) {
+         
+         
+         if(i == no)
+         {
+         
+         }else{
+         
+         document.getElementById("cancelrow"+i).click();
+         
+         
+         }
+         }*/
+
+    }
+
+    function save_row(no) {
+
+
+        var fkms_val_s = document.getElementById("name_row" + no).value;
+        var tkms_val_S = document.getElementById("country_row" + no).value;
+        var price_val_S = document.getElementById("age_row" + no).value;
+        var status_val_s = document.getElementById("status_row" + no).value;
+        var seller_id = document.getElementById("seller_id").value;
+        var seller_email = document.getElementById("seller_email").value;
+
+        var fkmsf = document.getElementById("name_row" + no);
+        var tkmsf = document.getElementById("country_row" + no);
+        var pricef = document.getElementById("age_row" + no);
+        if (fkms_val_s == "" && tkms_val_S == "" && price_val_S == "") {
+            fkmsf.style.border = "1px solid red";
+            tkmsf.style.border = "1px solid red";
+            pricef.style.border = "1px solid red";
+            return false;
+        } else if (fkms_val_s != "" && tkms_val_S == "" && price_val_S == "") {
+            tkmsf.style.border = "1px solid red";
+            pricef.style.border = "1px solid red";
+            fkmsf.removeAttribute("style");
+            return false;
+        } else if (fkms_val_s == "" && tkms_val_S != "" && price_val_S == "") {
+            fkmsf.style.border = "1px solid red";
+            pricef.style.border = "1px solid red";
+            tkmsf.removeAttribute("style");
+            return false;
+        } else if (fkms_val_s == "" && tkms_val_S == "" && price_val_S != "") {
+            fkmsf.style.border = "1px solid red";
+            tkmsf.style.border = "1px solid red";
+            pricef.removeAttribute("style");
+            return false;
+        } else if (fkms_val_s != "" && tkms_val_S != "" && price_val_S == "") {
+            fkmsf.removeAttribute("style");
+            tkmsf.removeAttribute("style");
+            pricef.style.border = "1px solid red";
+            return false;
+        } else if (fkms_val_s != "" && tkms_val_S == "" && price_val_S != "") {
+            fkmsf.removeAttribute("style");
+            tkmsf.style.border = "1px solid red";
+            pricef.removeAttribute("style");
+            return false;
+        } else if (fkms_val_s == "" && tkms_val_S != "" && price_val_S != "") {
+            fkmsf.style.border = "1px solid red";
+            tkmsf.removeAttribute("style");
+            pricef.removeAttribute("style");
+            return false;
+        } else if (fkms_val_s != "" && tkms_val_S != "" && price_val_S != "") {
+
+            fkmsf.removeAttribute("style");
+            tkmsf.removeAttribute("style");
+            pricef.removeAttribute("style");
+//return true;
+            document.getElementById("delivery-loader").style.display = "block";
+            /*ajax*/
+            require(['jquery', 'jquery/ui'], function ($) {
+                document.getElementById("delivery-loader").style.display = "block";
+
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "<?php echo $this->getUrl('deliveryrangeprice/delivery/rangepriceajax', ['_secure' => true]); ?>", //Relative or absolute path to response.php file
+                    data: {
+                        "seller_id": seller_id,
+                        "from_kms": fkms_val_s,
+                        "to_kms": tkms_val_S,
+                        "delivery_price": price_val_S,
+                        "is_active": status_val_s,
+                        "email": seller_email
+                    },
+                    success: function (data) {
+                        /*
+                         var resmsg = data.savedsuccess;
+                         $(".opmsgdisplay_delivery").append("<div >"+resmsg+"</div>");
+                         */
+                        var update_status_val_s_edit = data.status;
+                        var checkedit_status = checkedit_stats_disable = "";
+                        if (update_status_val_s_edit == 1) {
+                            var checkedit_status = "selected = selected";
+                        } else {
+                            var checkedit_stats_disable = "selected = selected";
+                        }
+
+                        var htmlr = "<tr id='row" + no + "'><td id='name_row" + no + "'>" + data.fkms + "</td><td id='country_row" + no + "' >" + data.tkms + "</td><td id='age_row" + no + "'>" + data.price + "</td><td><select name='is_active' id='status_row" + no + "' ><option val='0' " + checkedit_stats_disable + ">disable</option><option val='1' " + checkedit_status + ">Enable</option></select></td><td><button type='submit' id='edit_button" + no + "' value='Edit' class='button edit' onclick='edit_row(" + no + ")'><span><span><span>Edit</span></span></span></button> <button style='display:none;'  type='submit' id='editsave" + no + "' value='Update' class='button editsave' onclick='editsave_row(" + no + "," + data.id + ")'><span><span><span>Update</span></span></span></button><button  type='submit' id='delete_button" + no + "' value='Delete' class='button delete' onclick='delete_row(" + no + "," + data.id + ")'><span><span><span>Delete</span></span></span></button><button  style='display:none;' type='submit' id='cancelrow" + no + "' value='Delete' class='button cancel' onclick='cancelrow_without_edit(" + no + "," + data.id + ")'><span><span><span>Cancel</span></span></span></button></td></tr>";
+                        document.getElementById("row" + no).innerHTML = htmlr;
+                        document.getElementById("delivery-loader").style.display = "none";
+                        document.getElementById("status_row" + no).disabled = true;
+
+<?php if (!empty($block->getSellerData())) { ?>
+                            var cc_count = '<?php echo count($block->getSellerData()); ?>';
+                            document.getElementById("countcc").value = cc_count;
+<?php } else { ?>
+                            document.getElementById("countcc").value = "";
+<?php } ?>
+                        location.reload();
+                    }
+                });
+            });
+            /*ajax*/
+        } else {
+            return true;
+        }
+
+
+    }
+
+    function delete_row(no, rowid) {
+        var rowid = rowid;
+        var confirmcheck = "Are you sure you want to delete this record?";
+        /*confirm box widget */
+        require([
+            'jquery',
+            'Magento_Ui/js/modal/confirm'
+        ],
+                function ($, confirmation) {
+                    // event.preventDefault();
+                    confirmation({
+                        title: 'Delete record',
+                        content: confirmcheck,
+                        actions: {
+                            confirm: function () {
+                                var seller_email = document.getElementById("seller_email").value;
+                                /*ajax*/
+                                require(['jquery', 'jquery/ui'], function ($) {
+                                    document.getElementById("delivery-loader").style.display = "block";
+                                    $.ajax({
+                                        type: "POST",
+                                        dataType: "json",
+                                        url: "<?php echo $this->getUrl('deliveryrangeprice/delivery/delete', ['_secure' => true]); ?>", //Relative or absolute path to response.php file
+                                        data: {"id": rowid, "email": seller_email},
+                                        success: function (data) {
+                                            /*
+                                             var resmsg = data.savedsuccess;
+                                             $(".opmsgdisplay_delivery").append("<div >"+resmsg+"</div>");
+                                             */
+                                            //document.getElementById("row"+no+"").outerHTML="";
+                                            var row = document.getElementById("row" + no);
+                                            row.parentNode.removeChild(row);
+                                            document.getElementById("delivery-loader").style.display = "none";
+                                            location.reload();
+                                        }
+                                    });
+                                });
+                                /*ajax*/
+                            },
+                            cancel: function () {
+                            },
+                            always: function () {
+                            }
+                        }
+                    });
+                    return false;
+                });
+
+        /*confirm box widget */
+
+    }
+
+    function add_row() {
+        var table = document.getElementById("data_table");
+        var table_len = (table.rows.length);
+        if (table_len <= 7) {
+            var row = table.insertRow(table_len).outerHTML =
+                    "<tr id='row" + table_len + "'><td><input id='name_row" + table_len + "' type='number' name='from_kms' ></td><td><input  id='country_row" + table_len + "' type='number' name='to_kms'></td><td><input type='number' name='delivery_price' id='age_row" + table_len + "'></td><td><select name='is_active' disabled id='status_row" + table_len + "'><option val='0'>disable</option><option  selected='selected' val='1'>Enable</option></select></td><td><button  type='submit' id='save_button" + table_len + "' value='Save' class='save' onclick='save_row(" + table_len + ")'><span><span><span>Submit</span></span></span></button><button type='submit' id='cancel" + table_len + "' value='Canecl' class='cancel' onclick='cancel_row(" + table_len + ")'><span><span><span>Cancel</span></span></span></button> </td></tr>";
+        } else {
+
+            alert("Please delete some record you have reached maximum limit to enter record!");
+        }
+
+    }
+</script>
+<script>
+    require(['jquery', 'jquery/ui'], function ($) {
+        $(".setdelivery").submit(function () {
+
+            var data = {
+                "action": "test"
+            };
+            data = $(this).serialize() + "&" + $.param(data);
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "<?php echo $this->getUrl('deliveryrangeprice/delivery/rangepriceajax', ['_secure' => true]); ?>", //Relative or absolute path to response.php file
+                data: data,
+                success: function (data) {
+                    var resmsg = data.savedsuccess;
+                    $(".opmsgdisplay_delivery").append("<div >" + resmsg + "</div>");
+
+                }
+            });
+            return false;
+        });
+    });
+
+
+</script>

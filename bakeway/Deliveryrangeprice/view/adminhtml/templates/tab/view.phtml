@@ -1,0 +1,19 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Template for block \Magento\Customer\Block\Adminhtml\Edit\Tab\View
+ */
+
+/** @var $block \Magento\Customer\Block\Adminhtml\Edit\Tab\View */
+//echo "<style>.customer-index-edit #tab_customer{display:none !important;}</style>";
+$_Status = 0;
+$_sellerid = $block->getRequest()->getParam('id');   
+$_Status = $this->helper('Webkul\Marketplace\Helper\Data')->isSellerCustomerExist($_sellerid);
+if($_Status == 1){
+echo "<style>.customer-index-edit #tab_customer{display:none !important;}</style>";
+}
+echo $block->getChildHtml();

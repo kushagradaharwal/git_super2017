@@ -1,0 +1,41 @@
+<?php
+/**
+ * Bakeway
+ *
+ * @category  Bakeway
+ * @package   Bakeway_Storeclone
+ * @author    Bakeway
+ */
+?>
+<div>
+    <div id="storeresult">
+
+    </div>
+</div>
+<script>
+    require([
+        "jquery",
+        "mage/mage",
+        "prototype"
+
+    ], function($){
+        $("input[type='file']").attr('form','customer_form');
+        $("#storeclone_store_search").on('click',function(){
+            $('.success_profile_msg').hide();
+            $('.error_profile_msg').hide();
+            var querystring = $("#storeclone_storename").val();
+            var self = $(this);
+            if(querystring != ''){
+                new Ajax.Request('<?php echo $block->getAjaxCheckUrl() ?>', {
+                    method: 'post',
+                    dataType: "html",
+                    parameters:{storename:querystring},
+                    onSuccess: function(transport){
+                        $('#storeresult').html('');
+                        $('#storeclone_base_fieldset').after($('#storeresult').html(transport.responseText).show());
+                    }
+                });
+            }
+        });
+    });
+</script>

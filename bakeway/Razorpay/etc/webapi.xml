@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/orders/initiatepayment" method="POST">
+        <service class="Bakeway\Razorpay\Api\PaymentgatewayRepositoryInterface" method="order"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+    </route>
+    
+    <route url="/V1/guest-orders/:cart-id/initiatepayment" method="POST">
+        <service class="Bakeway\Razorpay\Api\PaymentgatewayRepositoryInterface" method="guestorder"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    
+     <route url="/V1/orders/processpayment" method="POST">
+        <service class="Bakeway\Razorpay\Api\PaymentgatewayRepositoryInterface" method="processcapture"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+    </route>
+    
+     <route url="/V1/guest-orders/:cart-id/processpayment" method="POST">
+        <service class="Bakeway\Razorpay\Api\PaymentgatewayRepositoryInterface" method="processcaptureguest"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+</routes>
