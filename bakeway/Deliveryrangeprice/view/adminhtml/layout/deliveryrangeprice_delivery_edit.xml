@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <body>
+        <referenceBlock name="page.title">
+            <action method="setTitleClass">
+                <argument name="class" xsi:type="string">Delivery Range</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Bakeway\Deliveryrangeprice\Block\Adminhtml\Rangeprice\Edit"
+                   name="deliveryrangeprice_rangeprice_edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Bakeway\Deliveryrangeprice\Block\Adminhtml\Rangeprice\Edit\Tabs"
+                   name="deliveryrangeprice_rangeprice_edit_tabs">
+                <block class="Bakeway\Deliveryrangeprice\Block\Adminhtml\Rangeprice\Edit\Tab\Delivery"
+                       name="deliveryrangeprice_rangeprice_edit_tab_delivery"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">delivery_section</argument>
+                    <argument name="block" xsi:type="string">deliveryrangeprice_rangeprice_edit_tab_delivery</argument>
+                </action>
+                <!--CedAddTab-->
+            </block>
+        </referenceContainer>
+    </body>
+</page>

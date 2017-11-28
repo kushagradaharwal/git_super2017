@@ -1,0 +1,114 @@
+<style>
+    #wrapper #data_table tr {
+        border-bottom: 1px solid #ccc;
+    }
+
+    .button.delete {
+        float: left;
+        margin-left: 8px;
+    }
+
+    .button.edit, .button.editsave {
+        float: left;
+        margin-right: 5%;
+    }
+
+    #data_table tr td {
+        width: 14%;
+    }
+
+    #data_table .save {
+        margin-right: 3%;
+    }
+
+    #data_table_default .delivery {
+        margin-left: 45px;
+    }
+
+    #data_table_default select {
+        width: 15%;
+        margin-left: 7px;
+    }
+
+    #delivery-range-main-div {
+    }
+
+    #delivery-range-main-div ul li {
+        list-style: none;
+    }
+
+    #wrapper {
+        margin-top: 32px;
+    }
+
+    .deliveryoption {
+        padding-left: 22px
+    }
+</style>
+<?php $_DeliveryValue = $block->getDeliveryvalue($block->getCustomerId()); ?>
+<div id="delivery-loader" style="display: none;"><img
+            src="<?php echo $block->getViewFileUrl('Bakeway_Deliveryrangeprice::images/ajaxloder.gif'); ?>"></div>
+<input type="hidden" name="seller_id" id="seller_id" value="<?php echo $block->getCustomerId(); ?>"/>
+<input type="hidden" name="seller_email" id="seller_email"
+       value="<?php echo $block->getSellerEmail($block->getCustomerId()); ?>"/>
+<input type="hidden" name="updated_time" id="updated_time" value="<?php echo date("Y-m-d  h:i:s"); ?>"/>
+
+<div id="delivery-range-main-div">
+    <h4>Set distance in Kms for providing delivery service to your Customer ordering from Bakeway.</h4>
+    <ul>
+        <li> System will not take orders for you if destination address is outside the range specified below.</li>
+        <li> Shortest distance is measured between your shop address & customer destination address</li>
+        <li> Delivery Fee to be selected as per delivery range & will be taxable to the customer</li>
+    </ul>
+    <span class="delivery"> <h4>Turn On Delivery Service</h4></span>
+    <div class="deliveryoption"><input id="delivery-yes" type="radio" name="is_delivery" value="1" <?php if ($_DeliveryValue == 1): ?> checked=checked <?php endif; ?>>Yes
+        <span style="padding-right: 10px;">&nbsp;</span>
+        <input id="delivery-no" type="radio" name="is_delivery" value="0" <?php if ($_DeliveryValue == 0): ?> checked=checked <?php endif; ?>>No
+        <span style="padding-right: 10px;">&nbsp;</span>
+        <button type="submit" title="Save" id="add-delivery" class="button add delivery" value="Add Row">
+            <span><span><span>SAVE</span></span></span>
+        </button>
+    </div>
+</div>
+<script>
+    require([
+        "jquery",
+        'Magento_Ui/js/modal/confirm'
+
+    ], function($, confirmation){
+        $("#add-delivery").on('click',function(event){
+			if (document.getElementById('delivery-yes').checked) {
+                    var status = document.getElementById('delivery-yes').value;
+                } else if (document.getElementById('delivery-no').checked) {
+                    var status = document.getElementById('delivery-no').value;
+                }
+				
+			    var seller_id = document.getElementById('seller_id').value;
+                var url = event.currentTarget.href;
+                if (status == 0)
+                    var sta = 'off';
+                else {
+                    var sta = 'on';
+                }
+				
+            confirmation({
+                content: 'Do you wish to make delivry ' + sta + '?',
+                actions: {
+                    confirm: function(){
+                        new Ajax.Request('<?php echo $this->getUrl('deliveryrangeprice/index/deliveryapi', ['_secure' => true]); ?>', {
+                            method: 'post',
+                            dataType: "json",
+                            parameters:{seller_id: seller_id,
+                                    status: status},
+                            onSuccess: function(transport){
+                               
+                            }
+                        });
+                    },
+                    cancel: function(){}
+                }
+            });
+        });
+    });
+</script>
+<?php echo $block->getChildHtml('griddelivery'); ?>

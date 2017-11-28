@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Kushagra
+ * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <!---<menu>
+        <add id="Bakeway_Deliveryrangeprice::bakeway_delivery_index" title="Manage Delivery Fee"
+             module="Bakeway_Deliveryrangeprice" sortOrder="6" parent="Webkul_Marketplace::menu"
+             action="deliveryrangeprice/delivery/index" resource="Bakeway_Deliveryrangeprice::bakeway_delivery_index"/>
+    </menu>-->
+</config>

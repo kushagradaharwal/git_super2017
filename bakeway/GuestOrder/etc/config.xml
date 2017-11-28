@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Bakeway
+ *
+ * @category  Bakeway
+ * @package   Bakeway_GuestOrder
+ * @author    Bakeway
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <guest_order_settings>
+            <guest_order_general>
+                <guset_order_token_days>2</guset_order_token_days>
+            </guest_order_general>
+        </guest_order_settings>
+    </default>
+</config>

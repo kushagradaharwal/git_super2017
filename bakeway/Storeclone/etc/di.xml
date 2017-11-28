@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Bakeway
+ *
+ * @category  Bakeway
+ * @package   Bakeway_Storeclone
+ * @author    Bakeway
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Magento\CatalogImportExport\Model\Import\Product">
+        <plugin name="ImportProductPlugin" type="Bakeway\Storeclone\Plugin\Product" sortOrder="1" />
+    </type>
+    <type name="Magento\ImportExport\Model\ResourceModel\Import\Data">
+        <plugin name="ImportDataPlugin" type="Bakeway\Storeclone\Plugin\StorelcloneImportData" sortOrder="1" />
+    </type>
+</config>

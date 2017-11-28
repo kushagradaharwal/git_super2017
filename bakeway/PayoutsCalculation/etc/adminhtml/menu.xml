@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Bakeway. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Backend/etc/menu.xsd">
+    <menu>
+        <add id="Bakeway_PayoutsCalculation::bakeway_payoutsexport" title="Export unpaid orders" module="Bakeway_PayoutsCalculation"  sortOrder="100" dependsOnModule="Bakeway_PayoutsCalculation"  parent="Magento_Sales::sales_operation" action="payouts/export/index" resource="Bakeway_Import::bakeway_payoutsexport"/>
+        <!--AddMenu-->
+    </menu>
+</config>
+

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Bakeway
+ *
+ * @category  Bakeway
+ * @package   Bakeway_CustomAttributes
+ * @author    Bakeway
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Bakeway_CustomAttributes" setup_version="1.0.7">
+    	<sequence>
+            <module name="Magento_Catalog"/>
+        </sequence>
+    </module>
+</config>

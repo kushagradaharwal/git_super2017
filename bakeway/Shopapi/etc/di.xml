@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Bakeway
+ * @package   Bakeway_Shopapi
+ * @author    Bakeway
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <preference for="Bakeway\Shopapi\Api\Data\ShopStatusInterface" type="Bakeway\Shopapi\Model\CustomShop" />
+    <preference for="Bakeway\Shopapi\Api\ShopRepositoryInterface" type="Bakeway\Shopapi\Model\Resource\ShopRepository" />
+</config>

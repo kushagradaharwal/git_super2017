@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Bakeway
+*
+* @category  Bakeway
+* @package   Bakeway_GuestOrder
+* @author    Bakeway
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="bakewaysettings" translate="label" sortOrder="20">
+            <label>Bakeway</label>
+        </tab>
+        <section id="guest_order_settings" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Guest Order</label>
+            <tab>bakewaysettings</tab>
+            <resource>Bakeway_GuestOrder::config</resource>
+            <group id="guest_order_general" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="guset_order_token_days" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order Tracking Days</label>
+                    <comment>Enter number of days the guest order token will remain valid</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,47 @@
+<?php
+/**
+ * Bakeway
+ *
+ * @category  Bakeway
+ * @package   Bakeway_Storeclone
+ * @author    Bakeway
+ */
+
+/** @var \Bakeway\Storeclone\Block\Adminhtml\StoreProducts $block */
+
+/** @var \Bakeway\Storeclone\Block\Adminhtml\Customer\Edit\Tab\Grid\Products $blockGrid */
+$blockGrid = $block->getBlockGrid();
+//$gridJsObjectName = $blockGrid->getJsObjectName();
+?>
+<?php  echo $block->getGridHtml(); ?>
+<script>
+    require([
+        "jquery",
+        'Magento_Ui/js/modal/confirm'
+
+    ], function($, confirmation){
+        $("#clonestart").on('click',function(event){
+            var sellerId = $(this).data("param");
+            confirmation({
+                title: 'Confirmation Alert',
+                content: 'Are you sure you want to continue?',
+                actions: {
+                    confirm: function(){
+                        new Ajax.Request('<?php echo $block->getAjaxUrlCloneProducts() ?>', {
+                            method: 'post',
+                            dataType: "html",
+                            parameters:{sellerId:sellerId},
+                            onSuccess: function(transport){
+                                $('#storeresult').html('');
+                                if(transport.responseText == 'success'){
+                                    window.location.reload();
+                                }
+                            }
+                        });
+                    },
+                    cancel: function(){}
+                }
+            });
+        });
+    });
+</script>

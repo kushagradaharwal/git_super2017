@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+   <!-- <type name="Magento\Quote\Model\ShippingMethodManagement">
+        <plugin name="ShippingCalculation" type="Bakeway\HomeDeliveryshipping\Plugin\ShippingMethodManagement"
+                sortOrder="7"
+                disabled="false"/>
+    </type>
+   <type name="Magento\Quote\Model\Quote\Address\RateResult\Method">
+      <plugin name="pricetotal" type="Bakeway\HomeDeliveryshipping\Plugin\Method"
+              sortOrder="3"
+              disabled="false"/>
+   </type>
+   <type name="Bakeway\HomeDeliveryshipping\Model\Carrier">
+     <plugin name="bakeway_carrier" type="Bakeway\HomeDeliveryshipping\Plugin\Carrier"
+             sortOrder="1"
+             disabled="false"/>
+  </type>-->
+ <!-- <type name="Magento\Quote\Model\Quote\Address\Total\Shipping">
+      <plugin name="bakeway_carrier" type="Bakeway\HomeDeliveryshipping\Plugin\Shipping"
+              sortOrder="1"
+              disabled="false"/>
+    </type>-->
+    
+  
+</config>

@@ -1,0 +1,128 @@
+<?php
+/**
+ * Copyright © 2015 bakewaycommerce. All rights reserved.
+ */
+?>
+<?php
+/**
+ * {{controller}} {{action}} template
+ *
+ * @var $block \Bakeway\ShopAvailability\Block\Availability\Index
+ */
+?>
+<?php
+$_Size = $block->getVendorData();
+if (!empty($_Size)) {
+    $_DaysVal = $_Size['userdata_operational_days'];
+    $_fromDate = $_Size['userdata_shop_temporarily_u_from'];
+    $_toDate = $_Size['userdata_shop_temporarily_u_to'];
+    $_Permclosed = $_Size['userdata_shop_operatational_status'];
+    ?>
+    <div class="shop-operatational-days">
+        <form name="" action="<?php echo $this->getUrl('shopavailability/availability/save'); ?>" method="post" >
+            <!-- Operation days-->
+            <div class="col-sm-12 col-xs-12" style="margin-bottom:20px;">
+
+                <div class="box box-information col-sm-12">
+                    <strong class="box-title col-sm-12">
+                        <span>Operation days</span>
+                    </strong>
+                    <div class="box-content">
+                        <?php
+                        $_CheckedDays = unserialize($_DaysVal);
+
+                        $_Days = array("Monday", "Tusday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+                        $i = 0;
+                        foreach ($_Days as $_Daysname) {
+                          
+                            ?>
+                            <span><input type="checkbox" <?php if(!empty($_CheckedDays)) { echo $_CheckedDays[$i]  == 1 ? 'checked' : '';  }  ?>  name="userdata_operational_days_<?php echo $i ?>" value="<?php echo $_Daysname; ?>"  id="userdata_operational_days_<?php echo $i ?>"/></span>          
+                            <label for="userdata_operational_days_<?php echo $i ?>"><?php echo $_Daysname; ?></label>
+                            </br> <?php
+                            $i++;
+                        }
+                        ?>
+
+
+                    </div>
+                </div> 
+            </div> 
+            <br> 
+            <!-- Operation days-->
+            <br> 
+            <!-- Temporarly Unavailable-->
+            <div class="col-sm-12 col-xs-12" style="margin-bottom:20px;">
+                <div class="box box-information">
+
+                    <div class="box box-information col-sm-12">
+                        <strong class="box-title col-sm-12">
+                            <span>Temporary unavailable</span>
+                        </strong>
+                        <div class="box-content">
+                            <span>
+                                <label>From:</label>
+                            </span>
+                            <input type="text" class="col-sm-12" id="userdata_shop_temporarily_u_from" value="<?php echo $_fromDate; ?>" name="userdata_shop_temporarily_u_from" aria-required="true" >
+
+                            <br>
+                            <span>
+                                <label>To:</label>
+                            </span>
+                            <input type="text"  id="userdata_shop_temporarily_u_to" value="<?php echo $_toDate; ?>" name="userdata_shop_temporarily_u_to" aria-required="true" >
+
+                        </div>
+                    </div> 
+                </div> 
+            </div> 
+            <!-- Temporarly Unavailable-->
+            <br>                    
+            <!--Permanentely closed-->
+            <div class="col-sm-12 col-xs-12" style="margin-bottom:20px;">
+                <div class="box box-information">
+
+                    <div class="box box-information col-sm-12">
+                        <strong class="box-title col-sm-12">
+                            <span>Permanently closed - </span> 
+                            
+                            <span style="margin-left:15px"><input type="checkbox" <?php echo $_Permclosed == 1 ? 'checked' : ''; ?> value="Yes" name="userdata_shop_operatational_status" id="userdata_shop_operatational_status"/></span>          
+                       </strong>
+                    </div> 
+                </div> 
+            </div> 
+            <!--Permanentely closed-->
+            <!--save button-->
+            <div class="col-sm-12 col-xs-12" style="margin-bottom:20px;">
+                <div class="box box-information">
+                    <div class="actions-toolbar">
+                        <div class="primary" style="margin-left:15px;">
+                            <button type="submit" class="action submit vendor primary" title="Save"><span>Submit</span></button>
+                        </div>
+
+                    </div> 
+                </div> 
+            </div>
+            <!--save button-->
+        </form>
+
+    </div>
+<?php } else { ?>
+    <div class="message info empty"><span><?php /* @escapeNotVerified */
+    echo __('No Records Found.')
+    ?></span></div>
+<?php } ?>
+
+<script>
+    require([
+        "jquery",
+        "mage/calendar"
+    ], function ($) {
+        $("#userdata_shop_temporarily_u_from").calendar({
+            buttonText: "<?php echo __('Select Date') ?>",
+        });
+
+        $("#userdata_shop_temporarily_u_to").calendar({
+            buttonText: "<?php echo __('Select Date') ?>",
+        });
+
+    });
+</script>

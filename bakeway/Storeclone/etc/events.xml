@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Bakeway
+ *
+ * @category  Bakeway
+ * @package   Bakeway_Storeclone
+ * @author    Bakeway
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="catalog_product_import_bunch_save_after">
+        <observer name="test_name" instance="Bakeway\Storeclone\Observer\CatalogProductSaveAfter" />
+    </event>
+    <event name="controller_action_catalog_product_save_entity_after">
+        <observer name="AdminProductSaveAfter" instance="Bakeway\Storeclone\Observer\AdminProductSaveAfter" />
+    </event>
+</config>

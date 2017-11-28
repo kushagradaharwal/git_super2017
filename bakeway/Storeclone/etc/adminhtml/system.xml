@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Bakeway
+ *
+ * @category  Bakeway
+ * @package   Bakeway_Storeclone
+ * @author    Bakeway
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="bakewaysettings" translate="label" sortOrder="20">
+            <label>Bakeway</label>
+        </tab>
+        <section id="vendor_app_settings" translate="label" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Vendor Settings</label>
+            <tab>bakewaysettings</tab>
+ 			<resource>Bakeway_Storeclone::config</resource>
+            <group id="storeclone" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Store Clone Configuration</label>
+                <field id="store_clone_review" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cloned product review?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Select yes/no for cloned product to be reviewed by admin</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

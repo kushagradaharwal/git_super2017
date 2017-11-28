@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="customer_form">
+			<referenceBlock name="customer_edit_tab_view">
+			 <action method="setTemplate">
+			   <argument name='template' translate="true" xsi:type='string'>Bakeway_Deliveryrangeprice::tab/view.phtml</argument>
+			 </action>
+			 </referenceBlock>
+            <block class="Bakeway\Deliveryrangeprice\Block\Adminhtml\Edit\Tab\Delivery"
+                   name="customer_edit_tab_delivery">
+                <action method="setTabLabel">
+                    <argument name="label" xsi:type="string">Delivery Range</argument>
+                </action>
+            </block>
+        </referenceBlock>
+	</body>
+</page>

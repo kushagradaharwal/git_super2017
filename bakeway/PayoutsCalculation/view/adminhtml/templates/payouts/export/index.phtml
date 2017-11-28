@@ -1,0 +1,54 @@
+<?php
+$object_manager = \Magento\Framework\App\ObjectManager::getInstance();
+$dir = $object_manager->get('Magento\Store\Model\StoreManagerInterface');
+$storeManager = $object_manager->get('Magento\Store\Model\StoreManagerInterface');
+/** @var \Magento\Store\Api\Data\StoreInterface|\Magento\Store\Model\Store $currentStore */
+$currentStore = $storeManager->getStore();
+$mediaUrl = $currentStore->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+$fileName = $block->getFile();
+?>
+
+<div class="import-export-tax-rates">
+    <?php if ($fileName === false): ?>
+    <div class="import-tax-rates">
+        <?php if ($block->getUseContainer()): ?>
+            <form id="import-form-store" class="admin__fieldset" action="<?php /* @escapeNotVerified */
+            echo $block->getUrl('payouts/export/save') ?>" method="post" enctype="multipart/form-data">
+                <?php endif; ?>
+                <?php echo $block->getBlockHtml('formkey') ?>
+                <div class="fieldset admin__field">
+                    <label for="import_sellerinfo_file" class="admin__field-label"><span><?php /* @escapeNotVerified */
+                            echo __('Create Outword File') ?></span></label>
+                    <div class="admin__field-control">
+                        <input type="submit" value="Export"/>
+                    </div>
+                </div>
+                <?php if ($block->getUseContainer()): ?>
+            </form>
+        <?php endif; ?>
+    </div>
+    <?php else : ?>
+        <div class="import-tax-rates">
+            <div><?php echo __('Download File from here: ') ?><a
+                    href="<?php echo $mediaUrl . 'outword/'.$fileName ?>"/><?php echo __($fileName) ?></a>
+        </div>
+    <?php endif; ?>
+</div>
+<script>
+    require(['jquery', "mage/mage", "loadingPopup"], function (jQuery) {
+
+//        jQuery('#import-form-store').mage('form').mage('validation');
+//        (function ($) {
+//            $('.import-submit').click(function () {
+//                if ($(':input[name="import_sellerinfo_file"]').val()) {
+//                    $('body').loadingPopup({
+//                        timeout: false
+//                    });
+//
+//                    $(this.form).submit();
+//                }
+//            });
+//        })(jQuery);
+
+    });
+</script>

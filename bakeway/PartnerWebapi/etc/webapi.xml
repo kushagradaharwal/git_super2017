@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Bakeway
+ *
+ * @category  Bakeway
+ * @package   Bakeway_Vendorapi
+ * @author    Bakeway
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/partners" method="GET">
+        <service class="Bakeway\PartnerWebapi\Api\SearchPartnerInterface" method="getSearchList"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/partners/search/autocomplete" method="GET">
+        <service class="Bakeway\PartnerWebapi\Api\SearchPartnerInterface" method="getSearchAutoCompleteList"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/partners/:vendorId" method="GET">
+        <service class="Bakeway\PartnerWebapi\Api\SearchPartnerInterface" method="getPartnerDetails"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/partners/filters" method="GET">
+        <service class="Bakeway\PartnerWebapi\Api\SearchPartnerInterface" method="getPartnerFilters"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/products/filters" method="GET">
+        <service class="Bakeway\PartnerWebapi\Api\SearchPartnerInterface" method="getProductFilters"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+</routes>

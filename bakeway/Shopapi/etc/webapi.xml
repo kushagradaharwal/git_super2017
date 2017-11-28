@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * @category  Bakeway
+ * @package   Bakeway_Shopapi
+ * @author    Bakeway
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/vendors/me/shop" method="POST">
+        <service class="Bakeway\Shopapi\Api\ShopRepositoryInterface" method="setShopStatus"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="vendorId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/vendors/me/shop" method="GET">
+        <service class="Bakeway\Shopapi\Api\ShopRepositoryInterface" method="getShopStatus"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="vendorId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+</routes>

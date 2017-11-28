@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
+    <extension_attributes for="Magento\Catalog\Api\Data\ProductInterface">
+        <attribute code="product_attributes" type="string" />
+        <attribute code="special_price" type="float" />
+        <attribute code="price_excl_tax" type="float" />
+        <attribute code="price_incl_tax" type="float" />
+        <attribute code="description" type="string" />
+        <attribute code="short_description" type="string" />
+        <attribute code="categories" type="string" />
+        <attribute code="media" type="string" />
+        <attribute code="configurable_product_prices" type="string" />
+        <attribute code="meta_title" type="string" />
+        <attribute code="meta_keyword" type="string" />
+        <attribute code="meta_description" type="string" />
+        <attribute code="seo_url" type="string" />
+    </extension_attributes>
+</config>

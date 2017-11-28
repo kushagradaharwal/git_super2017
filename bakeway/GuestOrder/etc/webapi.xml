@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Bakeway
+ *
+ * @category  Bakeway
+ * @package   Bakeway_GuestOrder
+ * @author    Bakeway
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/guest-order/track/:trackingToken" method="GET">
+        <service class="Bakeway\GuestOrder\Api\GuestOrderTrackRepositoryInterface" method="trackOrder"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+     <route url="/V1/guest-carts/:guest_quote_id" method="PUT">
+        <service class="Bakeway\GuestOrder\Api\GuestCartsEditRepositoryInterface" method="editcart"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+</routes>

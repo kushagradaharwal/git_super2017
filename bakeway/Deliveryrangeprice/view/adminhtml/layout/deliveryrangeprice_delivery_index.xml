@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+
+    <body>
+        <referenceBlock name="page.title">
+            <action method="setTitleClass">
+                <argument name="class" xsi:type="string">Delivery Range</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Bakeway\Deliveryrangeprice\Block\Adminhtml\Rangeprice"
+                   name="deliveryrangeprice_rangeprice_container"/>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Bakeway
+ *
+ * @category  Bakeway
+ * @package   Bakeway_Vendorcounter
+ * @author    Bakeway
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/vendors/me/counter" method="POST">
+        <service class="Bakeway\Vendorcounter\Api\CounterRepositoryInterface" method="setVendorCounter"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="vendorId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+     <route url="/V1/vendors/me/counter" method="PUT">
+        <service class="Bakeway\Vendorcounter\Api\CounterRepositoryInterface" method="updateVendorCounter"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="vendorId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/vendors/me/counter/:sku" method="PUT">
+        <service class="Bakeway\Vendorcounter\Api\CounterRepositoryInterface" method="updateCounterProduct"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="vendorId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/vendors/me/counter" method="GET">
+        <service class="Bakeway\Vendorcounter\Api\CounterRepositoryInterface" method="getRealtimeCounter"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="vendorId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+</routes>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Bakeway
+ *
+ * @category  Bakeway
+ * @package   Bakeway_Vendorapi
+ * @author    Bakeway
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_order_item_collection_load_before">
+        <observer name="bakeway_rest_api_sales_order_item_collection_load_before" instance="Bakeway\Vendorapi\Observer\SalesOrderApiItemCollectionBefore" />
+    </event>
+</config>

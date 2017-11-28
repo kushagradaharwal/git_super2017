@@ -1,0 +1,16 @@
+[2017-09-06 11:10:57] main.CRITICAL: exception 'RuntimeException' with message 'The path "E:/xampp/htdocs/backway_new_clone/bakeway/var/generation/Magento/MediaStorage/Model/File/Storage/Response/Interceptor.php.17108" cannot be renamed into "E:/xampp/htdocs/backway_new_clone/bakeway/var/generation/Magento/MediaStorage/Model/File/Storage/Response/Interceptor.php" Warning!rename(E:/xampp/htdocs/backway_new_clone/bakeway/var/generation/Magento/MediaStorage/Model/File/Storage/Response/Interceptor.php.17108,E:/xampp/htdocs/backway_new_clone/bakeway/var/generation/Magento/MediaStorage/Model/File/Storage/Response/Interceptor.php): The process cannot access the file because it is being used by another process. (code: 32)' in E:\xampp\htdocs\backway_new_clone\bakeway\vendor\magento\framework\Code\Generator.php:115
+Stack trace:
+#0 E:\xampp\htdocs\backway_new_clone\bakeway\vendor\magento\framework\Code\Generator\Autoloader.php(35): Magento\Framework\Code\Generator->generateClass('Magento\\MediaSt...')
+#1 [internal function]: Magento\Framework\Code\Generator\Autoloader->load('Magento\\MediaSt...')
+#2 [internal function]: spl_autoload_call('Magento\\MediaSt...')
+#3 E:\xampp\htdocs\backway_new_clone\bakeway\vendor\magento\framework\Code\Reader\ClassReader.php(19): ReflectionClass->__construct('Magento\\MediaSt...')
+#4 E:\xampp\htdocs\backway_new_clone\bakeway\vendor\magento\framework\ObjectManager\Definition\Runtime.php(44): Magento\Framework\Code\Reader\ClassReader->getConstructor('Magento\\MediaSt...')
+#5 E:\xampp\htdocs\backway_new_clone\bakeway\vendor\magento\framework\ObjectManager\Factory\Dynamic\Developer.php(71): Magento\Framework\ObjectManager\Definition\Runtime->getParameters('Magento\\MediaSt...')
+#6 E:\xampp\htdocs\backway_new_clone\bakeway\vendor\magento\framework\ObjectManager\ObjectManager.php(71): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->create('Magento\\MediaSt...')
+#7 E:\xampp\htdocs\backway_new_clone\bakeway\vendor\magento\framework\ObjectManager\Factory\AbstractFactory.php(126): Magento\Framework\ObjectManager\ObjectManager->get('Magento\\MediaSt...')
+#8 E:\xampp\htdocs\backway_new_clone\bakeway\vendor\magento\framework\ObjectManager\Factory\Dynamic\Developer.php(53): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgument(Array, 'Magento\\MediaSt...', NULL, 'response', 'Magento\\MediaSt...')
+#9 E:\xampp\htdocs\backway_new_clone\bakeway\vendor\magento\framework\ObjectManager\Factory\Dynamic\Developer.php(82): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->_resolveArguments('Magento\\MediaSt...', Array, Array)
+#10 E:\xampp\htdocs\backway_new_clone\bakeway\vendor\magento\framework\ObjectManager\ObjectManager.php(57): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->create('Magento\\MediaSt...', Array)
+#11 E:\xampp\htdocs\backway_new_clone\bakeway\vendor\magento\framework\App\Bootstrap.php(233): Magento\Framework\ObjectManager\ObjectManager->create('Magento\\MediaSt...', Array)
+#12 E:\xampp\htdocs\backway_new_clone\bakeway\pub\get.php(84): Magento\Framework\App\Bootstrap->createApplication('Magento\\MediaSt...', Array)
+#13 {main} [] []

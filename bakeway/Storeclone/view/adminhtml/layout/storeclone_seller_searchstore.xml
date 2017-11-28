@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Bakeway
+ *
+ * @category  Bakeway
+ * @package   Bakeway_Storeclone
+ * @author    Bakeway
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <body>
+        <!--<referenceContainer name="content">-->
+            <!--<block class="Bakeway\Storeclone\Block\Adminhtml\StoreSearchResult" template="Bakeway_Storeclone::customer/storesearchresult.phtml" name="seller_storeclone_storesearchresult"/>-->
+        <!--</referenceContainer>-->
+    </body>
+</page>

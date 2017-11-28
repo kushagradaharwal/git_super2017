@@ -1,0 +1,54 @@
+<?php
+$object_manager = \Magento\Framework\App\ObjectManager::getInstance();
+$dir = $object_manager->get('Magento\Store\Model\StoreManagerInterface');
+$storeManager = $object_manager->get('Magento\Store\Model\StoreManagerInterface');
+/** @var \Magento\Store\Api\Data\StoreInterface|\Magento\Store\Model\Store $currentStore */
+$currentStore = $storeManager->getStore();
+$mediaUrl = $currentStore->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+?>
+
+<div class="import-export-tax-rates">
+    <div class="import-tax-rates">
+        <?php if ($block->getUseContainer()): ?>
+        <form id="import-form-store" class="admin__fieldset" action="<?php /* @escapeNotVerified */
+        echo $block->getUrl('import/import/save') ?>" method="post" enctype="multipart/form-data">
+            <?php endif; ?>
+            <?php echo $block->getBlockHtml('formkey') ?>
+            <div class="fieldset admin__field">
+                <div><?php echo __('Download Sample File from here: ') ?><a
+                            href="<?php echo $mediaUrl . 'seller/sellerinfo.csv' ?>"/><?php echo __('Sample Csv') ?></a>
+                </div>
+
+                <label for="import_sellerinfo_file" class="admin__field-label"><span><?php /* @escapeNotVerified */
+                        echo __('Import Seller Information') ?></span></label>
+                <div class="admin__field-control">
+                    <input type="file" id="import_sellerinfo_file" name="import_sellerinfo_file"
+                           class="input-file required-entry"/>
+                    <input type="submit" value="Import"/>
+                </div>
+            </div>
+            <?php if ($block->getUseContainer()): ?>
+        </form>
+    <?php endif; ?>
+
+    </div>
+
+</div>
+<script>
+    require(['jquery', "mage/mage", "loadingPopup"], function (jQuery) {
+
+        jQuery('#import-form-store').mage('form').mage('validation');
+        (function ($) {
+            $('.import-submit').click(function () {
+                if ($(':input[name="import_sellerinfo_file"]').val()) {
+                    $('body').loadingPopup({
+                        timeout: false
+                    });
+
+                    $(this.form).submit();
+                }
+            });
+        })(jQuery);
+
+    });
+</script>
